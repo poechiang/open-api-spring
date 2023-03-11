@@ -1,0 +1,4 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://blogger:4Kfb0HYtJqllaj5Z817YmA==@cluster0.8bn1n.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
