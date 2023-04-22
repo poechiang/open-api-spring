@@ -15,13 +15,6 @@ public enum UpdateMode {
   }
 
   /**
-   * @return the String representation of the UpdateMode
-   */
-  public String getValue() {
-    return value;
-  }
-
-  /**
    * Returns the UpdateMode from the string representation
    *
    * @param updateMode the string representation of the validation action.
@@ -35,5 +28,12 @@ public enum UpdateMode {
       }
     }
     throw new IllegalArgumentException(format("'%s' is not a valid updateMode", updateMode));
+  }
+
+  /**
+   * @return the String representation of the UpdateMode
+   */
+  public String getValue() {
+    return value;
   }
 }

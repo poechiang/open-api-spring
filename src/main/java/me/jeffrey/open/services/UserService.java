@@ -1,8 +1,9 @@
 package me.jeffrey.open.services;
 
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import me.jeffrey.open.dto.User;
-import org.springframework.stereotype.Service;import java.util.List;
+import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service

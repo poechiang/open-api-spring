@@ -10,7 +10,8 @@ import java.util.Collection;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import me.jeffrey.open.common.UpdateMode;
-import org.bson.types.ObjectId;import org.springframework.beans.factory.annotation.Autowired;
+import org.bson.types.ObjectId;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -22,16 +23,16 @@ import org.springframework.stereotype.Service;
 @Service
 public abstract class DocumentService<T> {
 
+  @Autowired protected MongoTemplate mongoTemplate;
+
   /** 设置集合名称 */
   protected abstract String getCollectionName();
+  ;
 
   protected Class<T> getEntityClass() {
     return (Class<T>)
         ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
   }
-  ;
-
-  @Autowired protected MongoTemplate mongoTemplate;
 
   /**
    * 插入【一条】文档数据，如果文档信息已经【存在就抛出异常】

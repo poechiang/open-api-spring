@@ -2,12 +2,10 @@ package me.jeffrey.open.services;
 
 import com.mongodb.client.model.ValidationAction;
 import com.mongodb.client.model.ValidationLevel;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
-
+import javax.annotation.Resource;
 import me.jeffrey.open.common.CollectionCreation;
 import org.bson.Document;
 import org.bson.conversions.Bson;
@@ -16,9 +14,6 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.CriteriaDefinition;
 import org.springframework.data.mongodb.core.validation.Validator;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
-
 
 @Service
 public class CollectionService {

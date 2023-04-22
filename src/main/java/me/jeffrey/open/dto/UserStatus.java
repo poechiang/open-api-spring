@@ -31,13 +31,6 @@ public enum UserStatus {
     }
     
     /**
-     * @return the int representation of the UserStatus
-     */
-    public int getValue() {
-        return value;
-    }
-    
-    /**
      * Returns the UserStatus from the string representation
      *
      * @param userStatus the string representation of the validation action.
@@ -51,5 +44,12 @@ public enum UserStatus {
             }
         }
         throw new IllegalArgumentException(format("'%s' is not a valid userStatus", userStatus));
+    }
+    
+    /**
+     * @return the int representation of the UserStatus
+     */
+    public int getValue() {
+        return value;
     }
 }

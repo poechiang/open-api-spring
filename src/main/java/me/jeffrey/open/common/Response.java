@@ -25,15 +25,12 @@ public class Response<T> {
     
     private T payload;
     
-    public String getResult(){
-        return code.name();
-    }
     public static <T> Response<T> Ok(T payload){
         Response<T> resp = new Response<>();
         
         return resp.setCode(BusinessCodes.SUCCESS).setPayload(payload);
     }
-    
+
     public static <T> Response<T> Fault(String msg, BusinessCodes code){
         Response<T> resp = new Response<>();
         return resp.setCode(code).setMessage(msg);
@@ -42,13 +39,18 @@ public class Response<T> {
     public static <T>  Response<T> Fault(String msg){
         return Response.Fault(msg, BusinessCodes.FAILURE);
     }
+    
     public static <T> Response<T> Fault(){
         return Response.Fault("Unknown Server Error", BusinessCodes.FAILURE);
     }
-    
+
     public static <T> Response<T> Fault(BusinessException e){
         
         Response<T> resp= Response.Fault(e.getMessage(),e.getCode());
         return resp.setError(e.getError());
+    }
+    
+    public String getResult(){
+        return code.name();
     }
 }

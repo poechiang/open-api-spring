@@ -1,15 +1,9 @@
 package me.jeffrey.open.common;
 
-import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonRawValue;
-import com.fasterxml.jackson.annotation.JsonValue;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.EnumSerializer;
-import jdk.jfr.Description;
-
 import static com.mongodb.assertions.Assertions.notNull;
 import static java.lang.String.format;
+
+import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 
 public enum BusinessCodes {
     
@@ -42,13 +36,6 @@ public enum BusinessCodes {
     }
     
     /**
-     * @return the String representation of the UpdateMode
-     */
-    public int getValue() {
-        return value;
-    }
-    
-    /**
      * Returns the UpdateMode from the string representation
      *
      * @param errorCode the int representation of the validation action.
@@ -62,5 +49,12 @@ public enum BusinessCodes {
             }
         }
         throw new IllegalArgumentException(format("'%s' is not a valid BusinessCodes", errorCode));
+    }
+    
+    /**
+     * @return the String representation of the UpdateMode
+     */
+    public int getValue() {
+        return value;
     }
 }

@@ -6,14 +6,10 @@ import me.jeffrey.open.common.BusinessCodes;
 public class DataBaseException extends BusinessException {
   
   
-  public String getError(){
-    return "Database Error";
-  }
-  
-  
   public DataBaseException(BusinessCodes code, Throwable cause ) {
     super(code,cause);
   }
+  
   
   public DataBaseException(BusinessCodes code, String msg) {
     super(code,msg);
@@ -21,6 +17,10 @@ public class DataBaseException extends BusinessException {
   
   public DataBaseException(BusinessCodes code, Throwable cause, String msg) {
     super(code,cause,msg);
+  }
+  
+  public String getError(){
+    return "Database Error";
   }
   
   

@@ -1,8 +1,7 @@
 package me.jeffrey.open.advise;
 
-import me.jeffrey.open.exception.BusinessException;
-import org.springframework.dao.DuplicateKeyException;
 import me.jeffrey.open.common.Response;
+import me.jeffrey.open.exception.BusinessException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;
