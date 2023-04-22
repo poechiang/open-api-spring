@@ -2,11 +2,13 @@ package me.jeffrey.open.services;
 
 import com.mongodb.client.model.ValidationAction;
 import com.mongodb.client.model.ValidationLevel;
-import jakarta.annotation.Resource;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import me.jeffrey.open.interfaces.CollectionCreation;
+
+
+import me.jeffrey.open.common.CollectionCreation;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.springframework.data.mongodb.core.CollectionOptions;
@@ -15,10 +17,14 @@ import org.springframework.data.mongodb.core.query.CriteriaDefinition;
 import org.springframework.data.mongodb.core.validation.Validator;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
+
 @Service
 public class CollectionService {
 
-  @Resource private MongoTemplate mongoTemplate;
+  @Resource
+  private MongoTemplate mongoTemplate;
 
   /**
    * 用指定名称和选项创建集合

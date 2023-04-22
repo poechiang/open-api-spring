@@ -2,3 +2,6 @@ spring:
   data:
     mongodb:
       uri: mongodb+srv://blogger:VmqdFefidA4LHun@cluster0.8bn1n.mongodb.net/myFirstDatabase?authSource=admin&replicaSet=atlas-glimny-shard-0&readPreference=primary&ssl=true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher

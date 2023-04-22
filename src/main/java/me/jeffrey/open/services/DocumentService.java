@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
-import me.jeffrey.open.interfaces.UpdateMode;
-import org.springframework.beans.factory.annotation.Autowired;
+import me.jeffrey.open.common.UpdateMode;
+import org.bson.types.ObjectId;import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -157,10 +157,10 @@ public abstract class DocumentService<T> {
    * @return 文档信息
    */
   public T find(String id) {
-
+    ObjectId oid = new ObjectId(id);
     T r = mongoTemplate.findById(id, getEntityClass(), getCollectionName());
     // 输出结果
-    log.info("用户信息：{}", r);
+    log.info("用户信息：{} {} {}", id,oid,r);
     return r;
   }
 

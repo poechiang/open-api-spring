@@ -1,4 +1,4 @@
-package me.jeffrey.open.interfaces;
+package me.jeffrey.open.common;
 
 import com.mongodb.client.model.ValidationAction;
 import com.mongodb.client.model.ValidationLevel;
