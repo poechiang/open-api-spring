@@ -18,16 +18,30 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Slf4j
 @Service
 public abstract class DocumentService<T> {
 
   @Autowired protected MongoTemplate mongoTemplate;
-
+  
+  protected HttpSession getSession(){
+    ServletRequestAttributes servletRequestAttributes =(ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+    if(null ==servletRequestAttributes){
+      return null;
+    }
+    
+    HttpServletRequest request = servletRequestAttributes.getRequest();
+    return request.getSession();
+  }
   /** 设置集合名称 */
   protected abstract String getCollectionName();
-  ;
+  
 
   protected Class<T> getEntityClass() {
     return (Class<T>)
@@ -230,7 +244,7 @@ public abstract class DocumentService<T> {
     if (null != criteria) {
       query = query.addCriteria(criteria);
     }
-    if (!sort.isEmpty()) {
+    if (null !=sort && !sort.isEmpty()) {
       query = query.with(Sort.by(sort));
     }
     if (skip > 0) {
@@ -243,7 +257,7 @@ public abstract class DocumentService<T> {
     List<T> documentList = mongoTemplate.find(query, getEntityClass(), getCollectionName());
     // 输出结果
     for (T r : documentList) {
-      log.info("用户信息：{}", r);
+      log.info("[MongoDB] select：{}", r);
     }
     return documentList;
   }
@@ -256,6 +270,7 @@ public abstract class DocumentService<T> {
   public long count() {
     return count(null);
   }
+  
   /**
    * 统计集合中符合【查询条件】的文档【数量】
    *

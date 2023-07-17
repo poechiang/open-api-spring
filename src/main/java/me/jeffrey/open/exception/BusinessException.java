@@ -3,7 +3,7 @@ package me.jeffrey.open.exception;
 import lombok.Getter;
 import me.jeffrey.open.common.BusinessCodes;
 
-public class BusinessException extends Exception {
+public class BusinessException extends RuntimeException {
   
   @java.io.Serial
   private static final long serialVersionUID = -3387516993124229948L;

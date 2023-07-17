@@ -90,26 +90,6 @@
             <version>18.2.27</version>
         </dependency>
         <dependency>
-            <groupId>de.monochromata.contract</groupId>
-            <artifactId>java-contract</artifactId>
-            <version>18.2.27</version>
-        </dependency>
-        <dependency>
-            <groupId>de.monochromata.contract</groupId>
-            <artifactId>java-contract</artifactId>
-            <version>18.2.27</version>
-        </dependency>
-        <dependency>
-            <groupId>de.monochromata.contract</groupId>
-            <artifactId>java-contract</artifactId>
-            <version>18.2.27</version>
-        </dependency>
-        <dependency>
-            <groupId>de.monochromata.contract</groupId>
-            <artifactId>java-contract</artifactId>
-            <version>18.2.27</version>
-        </dependency>
-        <dependency>
             <groupId>com.github.sebhoss.contract</groupId>
             <artifactId>contract-guice</artifactId>
             <version>1.0.0</version>
@@ -118,6 +98,19 @@
             <groupId>in.yajnesh.util</groupId>
             <artifactId>java-util</artifactId>
             <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
     </dependencies>
     <build>

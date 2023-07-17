@@ -46,7 +46,7 @@ public class SensitiveSerialize extends JsonSerializer<String> implements Contex
       case MOBILE -> gen.writeString(Desensitizer.mobile(value, symbol));
       case TELEPHONE -> gen.writeString(Desensitizer.telephone(value, symbol));
       default -> throw new SerializeException(
-          BusinessCodes.UNKOWN_SENSITIVE_TYPE, String.format("未知的敏感类型参数 {%1$s}", sensitiveType));
+          BusinessCodes.UNKNOWN_SENSITIVE_TYPE, String.format("未知的敏感类型参数 {%1$s}", sensitiveType));
     }
   }
 

@@ -1,4 +1,4 @@
-package me.jeffrey.open.dto;
+package me.jeffrey.open.common;
 
 import static com.mongodb.assertions.Assertions.notNull;
 import static java.lang.String.format;

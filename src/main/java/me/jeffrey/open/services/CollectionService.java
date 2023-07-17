@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import me.jeffrey.open.common.CollectionCreation;
 import org.bson.Document;
 import org.bson.conversions.Bson;
@@ -14,6 +17,9 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.CriteriaDefinition;
 import org.springframework.data.mongodb.core.validation.Validator;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Service
 public class CollectionService {
@@ -21,6 +27,16 @@ public class CollectionService {
   @Resource
   private MongoTemplate mongoTemplate;
 
+  protected HttpSession getSession(){
+    ServletRequestAttributes servletRequestAttributes =(ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+    if(null ==servletRequestAttributes){
+      return null;
+    }
+    
+    HttpServletRequest request = servletRequestAttributes.getRequest();
+    return request.getSession();
+  }
+  
   /**
    * 用指定名称和选项创建集合
    *

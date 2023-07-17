@@ -14,7 +14,7 @@ public class PagingResponse<T>  extends Response<T> {
   protected Paging paging;
   
   public static <T> PagingResponse<T>  Ok(T payload,Paging paging){
-    PagingResponse<T> resp = new PagingResponse<T>();
+    PagingResponse<T> resp = new PagingResponse<>();
     return resp.setCode(BusinessCodes.SUCCESS).setPayload(payload).setPaging(paging);
   }
 

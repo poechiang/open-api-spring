@@ -15,7 +15,6 @@ import me.jeffrey.open.exception.BusinessException;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Response<T> {
     
-    @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     private BusinessCodes code;
     
     
@@ -25,12 +24,18 @@ public class Response<T> {
     
     private T payload;
     
+    public static <T> Response<T> Empty(){
+        Response<T> resp = new Response<>();
+        
+        return resp.setCode(BusinessCodes.SUCCESS);
+    }
+    
     public static <T> Response<T> Ok(T payload){
         Response<T> resp = new Response<>();
         
         return resp.setCode(BusinessCodes.SUCCESS).setPayload(payload);
     }
-
+    
     public static <T> Response<T> Fault(String msg, BusinessCodes code){
         Response<T> resp = new Response<>();
         return resp.setCode(code).setMessage(msg);

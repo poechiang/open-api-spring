@@ -1,4 +1,4 @@
-package me.jeffrey.open.dto;
+package me.jeffrey.open.common;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -8,7 +8,7 @@ import lombok.experimental.Accessors;
 @Data
 @ToString
 @Accessors(chain = true)
-class Phone {
+public class Phone {
   
   /**
    * 国家代码

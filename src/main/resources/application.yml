@@ -1,7 +1,12 @@
 spring:
   data:
     mongodb:
-      uri: mongodb+srv://blogger:VmqdFefidA4LHun@cluster0.8bn1n.mongodb.net/myFirstDatabase?authSource=admin&replicaSet=atlas-glimny-shard-0&readPreference=primary&ssl=true
+      uri: mongodb+srv://blogger:VmqdFefidA4LHun@cluster0.8bn1n.mongodb.net/cloud-base?authSource=admin&replicaSet=atlas-glimny-shard-0&readPreference=primary&ssl=true
+
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+
+  redis:
+    host: 127.0.0.1
+    port: 6379

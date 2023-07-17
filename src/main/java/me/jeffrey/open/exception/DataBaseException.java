@@ -5,6 +5,8 @@ import me.jeffrey.open.common.BusinessCodes;
 
 public class DataBaseException extends BusinessException {
   
+  @java.io.Serial
+  private static final long serialVersionUID = 637253920208226520L;
   
   public DataBaseException(BusinessCodes code, Throwable cause ) {
     super(code,cause);
