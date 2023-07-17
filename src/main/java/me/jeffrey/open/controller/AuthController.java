@@ -4,7 +4,6 @@ import io.jsonwebtoken.Claims;
 import io.swagger.annotations.Api;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.Date;
 import java.util.Objects;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,8 +19,6 @@ import me.jeffrey.open.services.CacheRedisService;
 import me.jeffrey.open.services.UserService;
 import me.jeffrey.open.utils.ImageVerificationCode;
 import me.jeffrey.open.utils.JwtHelper;
-import me.jeffrey.open.utils.RequestHelper;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,7 +33,6 @@ public class AuthController {
   @Autowired protected UserService userService;
 
   static final String CAPTCHA_SESSION_KEY = "captcha_code";
-
 
   @GetMapping("me")
   @ResponseBody
@@ -80,7 +76,7 @@ public class AuthController {
     ivc.output(image, response.getOutputStream()); // 将验证码图片响应给客户端
   }
 
-  @PostMapping("check")
+  @GetMapping("check")
   @ResponseBody
   public Response<?> checkLoginState(HttpServletRequest request, HttpServletResponse response)
       throws IOException {
