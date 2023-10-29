@@ -17,49 +17,43 @@ public enum BusinessCodes {
     /**
      * [通用] 身份验证失败
      */
-    UNAUTHORIZED(4010401),
+    UNAUTHORIZED(4010000),
     /**
      * [AUTH] TOKEN过期
      */
-    TOKEN_EXPIRED(4010402),
+    TOKEN_EXPIRED(4010001),
     
     /**
      * [通用] 鉴权失败
      */
-    FORBIDDEN(4030403),
+    FORBIDDEN(4030000),
     /**
      * [通用] 资源未找到
      */
-    NOT_FOUND(4000404),
+    NOT_FOUND(4040000),
     /**
      * [AUTH] 无效参数
      */
-    INVALID_ARGUMENT(4000410),
+    INVALID_ARGUMENT(4000001),
     /**
      * [AUTH] 验证码错误
      */
-    INVALID_CAPTCHA(4000411),
+    INVALID_CAPTCHA(4000002),
     /**
      * [AUTH] 密码错误
      */
-    INVALID_PASSWORD(4000412),
-    
-    FAILURE(5000500),
-    /**
-     * [数据库] 键值重复
-     * @implNote implNote
-     * @implSpec implSpec
-     * @apiNote apiNote
-     * @serial serial
-     * @see see
-     * @since since
-     */
-    DB_DUPLICATE_KEY(4001100),
-    
+    INVALID_PASSWORD(4000003),
     /**
      * 未知的敏感类型
      */
-    UNKNOWN_SENSITIVE_TYPE(1901000);
+    UNKNOWN_SENSITIVE_TYPE(4000004),
+    
+    FAILURE(5000000),
+    /**
+     * [数据库] 键值重复
+     */
+    DB_DUPLICATE_KEY(5001901);
+    
     @JsonValue
     public final int value;
     

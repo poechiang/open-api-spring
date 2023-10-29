@@ -5,7 +5,8 @@ import java.util.List;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import me.jeffrey.open.common.MessageType;
-import me.jeffrey.open.dto.Message;
+import me.jeffrey.open.common.SelectResult;
+import me.jeffrey.open.dto.MessageDTO;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.mongodb.core.aggregation.*;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -13,14 +14,14 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class MessageService extends DocumentService<Message> {
+public class MessageService extends DocumentService<MessageDTO> {
 
   @Override
   protected String getCollectionName() {
     return "messages";
   }
 
-  public List<Message> selectMessages(Criteria criteria, long pageIndex, int pageSize) {
+  public List<MessageDTO> selectMessages(Criteria criteria, long pageIndex, int pageSize) {
 
     LookupOperation receiverLookupOperation =
         Aggregation.lookup("users", "_id", "inBox", "receiver");
@@ -65,25 +66,30 @@ public class MessageService extends DocumentService<Message> {
               Aggregation.match(criteria));
     }
 
-    AggregationResults<Message> aggregationResults =
-        mongoTemplate.aggregate(aggregation, getCollectionName(), Message.class);
+    AggregationResults<MessageDTO> aggregationResults =
+        mongoTemplate.aggregate(aggregation, getCollectionName(), MessageDTO.class);
     return aggregationResults.getMappedResults();
   }
 
-  public List<Message> selectForSender(String senderId, int pageIndex, int pageSize) {
-    return selectMessages(Criteria.where("senderId").is(senderId), pageIndex, pageSize);
+  public SelectResult<MessageDTO> selectForSender(String senderId, int pageIndex, int pageSize) {
+    SelectResult<MessageDTO> selectResult = new SelectResult<>();
+    
+    Criteria criteria = Criteria.where("senderId").is(senderId);
+    selectResult.setTotal(this.count(criteria)).setList(selectMessages(criteria, pageIndex, pageSize));
+    return selectResult;
   }
 
-  public List<Message> selectForReceiver(String receiverId, int pageIndex, int pageSize) {
+  public List<MessageDTO> selectForReceiver(String receiverId, int pageIndex, int pageSize) {
     return selectMessages(Criteria.where("receiverId").is(receiverId), pageIndex, pageSize);
   }
 
-  public Message sendSystemMessage(Map<String, String> data) {
+  public MessageDTO sendSystemMessage(Map<String, String> data) {
 
     Date date = new Date();
 
-    Message msg = new Message().setTitle(data.get("title")).setContent(data.get("content"));
+    MessageDTO msg = new MessageDTO().setTitle(data.get("title")).setContent(data.get("content"));
     msg.setType(MessageType.NOTIFICATION).setSendDate(date.getTime());
     return save(msg);
   }
+  
 }

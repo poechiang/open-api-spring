@@ -7,14 +7,13 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 import lombok.ToString;
 import lombok.experimental.Accessors;
-import me.jeffrey.open.common.Phone;
 import me.jeffrey.open.common.SensitiveType;
 import me.jeffrey.open.common.UserStatus;
+import me.jeffrey.open.common.annotations.FuzzyQuery;
 import me.jeffrey.open.common.annotations.Sensitive;
 import me.jeffrey.open.utils.serialize.ObjectIdSerializer;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.util.List;
@@ -22,20 +21,23 @@ import java.util.List;
 @Data
 @ToString
 @Accessors(chain = true)
-public class User {
+public class UserDTO {
   
   /** 使用 @MongoID 能更清晰的指定 _id 主键 */
   @Id @MongoId
   @org.mongojack.ObjectId
   @JsonSerialize(using = ObjectIdSerializer.class)
   private ObjectId id;
-  
+  @FuzzyQuery
   private String uname;
+  @FuzzyQuery
+  private String rname;
   @JsonIgnore
   private String password;
   private String gender;
-  private Phone phone;
-  @Sensitive(type=SensitiveType.EMAIL)
+  @FuzzyQuery
+  private String phone;
+  @FuzzyQuery
   private String email;
   @JsonFormat(shape = JsonFormat.Shape.NUMBER)
   private UserStatus status = UserStatus.INACTIVE;
@@ -43,19 +45,5 @@ public class User {
   private List<ObjectId> inBox;
   
   private List<ObjectId> outBox;
-  
-  
-  
-  @JsonProperty
-  @Sensitive(type = SensitiveType.MOBILE)
-  public String getMobile(){
-    return String.format("(%1$s)%2$s",phone.getCountry(),phone.getMobile());
-  }
-  @JsonProperty
-  @Sensitive(type = SensitiveType.TELEPHONE)
-  public String getTel(){
-    return String.format("(%1$s)%2$s-%3$s",phone.getCountry(),phone.getArea(),phone.getTel());
-  }
-  
   
 }

@@ -9,9 +9,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
+import me.jeffrey.open.common.Paging;
+import me.jeffrey.open.common.PagingResponse;
+import me.jeffrey.open.common.Response;
 import me.jeffrey.open.common.UpdateMode;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -21,24 +25,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 @Slf4j
 @Service
 public abstract class DocumentService<T> {
 
   @Autowired protected MongoTemplate mongoTemplate;
   
-  protected HttpSession getSession(){
-    ServletRequestAttributes servletRequestAttributes =(ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-    if(null ==servletRequestAttributes){
-      return null;
-    }
-    
-    HttpServletRequest request = servletRequestAttributes.getRequest();
-    return request.getSession();
-  }
   /** 设置集合名称 */
   protected abstract String getCollectionName();
   
@@ -57,7 +49,7 @@ public abstract class DocumentService<T> {
 
     T record = mongoTemplate.insert(data, getCollectionName());
 
-    log.info("存储的用户信息为：{}", record);
+    log.info("[DOCUMENT] {} 写入文档 ", record);
     return record;
   }
 
@@ -70,7 +62,7 @@ public abstract class DocumentService<T> {
     Collection<T> records = mongoTemplate.insert(list, getCollectionName());
     // 输出存储结果
     for (T r : records) {
-      log.info("存储的用户信息为：{}", r);
+      log.info("[DOCUMENT] {} 写入文档 ", r);
     }
     return records;
   }
@@ -83,8 +75,8 @@ public abstract class DocumentService<T> {
   public T save(T data) {
 
     T record = mongoTemplate.save(data, getCollectionName());
-
-    log.info("存储的用户信息为：{}", record);
+    
+    log.info("[DOCUMENT] {} 写入文档 ", record);
     return record;
   }
 
@@ -259,9 +251,26 @@ public abstract class DocumentService<T> {
     for (T r : documentList) {
       log.info("[MongoDB] select：{}", r);
     }
+    
     return documentList;
   }
 
+  public PagingResponse<List<T>> select (Query query){
+    
+    // 查询并返回结果
+    List<T> documentList = mongoTemplate.find(query, getEntityClass(), getCollectionName());
+    
+    Paging paging = new Paging();
+    log.info("cache page info, page:{}, pageSize:{}",query.getSkip(),query.getLimit());
+    paging.setPage(query.getSkip()).setPageSize(query.getLimit());
+    query.skip(0).limit(0);
+    
+    log.info("cache page info, total:{}",paging.getTotal());
+    
+    paging.setTotal(mongoTemplate.count(query, getEntityClass(), getCollectionName()));
+    
+    return PagingResponse.Ok(documentList, paging);
+  }
   /**
    * 统计集合中文档【数量】
    *

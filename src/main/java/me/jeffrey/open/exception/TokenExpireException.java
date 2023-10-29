@@ -12,7 +12,6 @@ public class TokenExpireException extends BusinessException {
         super(BusinessCodes.TOKEN_EXPIRED,cause);
     }
     
-    
     public TokenExpireException(String msg) {
         super(BusinessCodes.TOKEN_EXPIRED,msg);
     }

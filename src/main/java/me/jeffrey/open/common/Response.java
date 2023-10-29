@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import me.jeffrey.open.exception.BusinessException;
+import me.jeffrey.open.utils.RequestHelper;
 
 @Data
 @Accessors(chain = true)

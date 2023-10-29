@@ -5,10 +5,10 @@ import com.mongodb.client.model.ValidationLevel;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
+import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import me.jeffrey.open.common.CollectionCreation;
 import org.bson.Document;
 import org.bson.conversions.Bson;
@@ -17,7 +17,6 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.CriteriaDefinition;
 import org.springframework.data.mongodb.core.validation.Validator;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -33,7 +32,7 @@ public class CollectionService {
       return null;
     }
     
-    HttpServletRequest request = servletRequestAttributes.getRequest();
+    HttpServletRequest request = (HttpServletRequest) servletRequestAttributes.getRequest();
     return request.getSession();
   }
   

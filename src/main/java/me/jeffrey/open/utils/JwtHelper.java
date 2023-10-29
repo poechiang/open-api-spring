@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import lombok.extern.slf4j.Slf4j;
-import me.jeffrey.open.dto.User;
+import me.jeffrey.open.dto.UserDTO;
 
 @Slf4j
 public class JwtHelper {
@@ -17,7 +17,7 @@ public class JwtHelper {
   public static final long JWT_SECRET_EXPIRE_MILLS = 7200000; // 2 hours
 
   public static String generateJwtToken(
-      User user ) {
+      UserDTO user ) {
     Map<String, Object> claims = new HashMap<>();
 
     claims.put("id", user.getId().toHexString());
